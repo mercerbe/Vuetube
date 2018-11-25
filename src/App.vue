@@ -1,8 +1,9 @@
 <template>
     <div class="container">
         <SearchBar @termChange="onTermChange"/>
+        <VideoDetail :video="selectedVideo"></VideoDetail>
         <!-- bind to send :videos to as prop to videolist from videos in parent -->
-        <VideoList :videos="videos"> </VideoList>
+        <VideoList @videoSelect="onVideoSelectInApp" :videos="videos"> </VideoList>
     </div>
 </template>
 
@@ -11,19 +12,26 @@
 import dotenv from 'dotenv';
 dotenv.config()
 import axios from 'axios';
+//test api key 
+const VUE_APP_API_KEY ="AIzaSyDht25O-2lCGrRd3QklvHvzfnZtLK_v5go";
 // components 
 import SearchBar from "./components/SearchBar";
 import VideoList from "./components/VideoList";
+import VideoDetail from "./components/VideoDetail";
 
 export default {
     //name can help with debugging to identify components
     name: "App",
     components: {
         SearchBar,
-        VideoList
+        VideoList,
+        VideoDetail
     },
     data() {
-        return{ videos: [],};
+        return{ 
+            videos: [],
+            selectedVideo: null
+             };
     },
     methods: {
         onTermChange(searchTerm) {
@@ -31,7 +39,7 @@ export default {
             axios
                 .get("https://www.googleapis.com/youtube/v3/search", {
                     params: {
-                        key: process.env.VUE_APP_API_KEY,
+                        key: VUE_APP_API_KEY,
                         type: "video",
                         part: "snippet",
                         q: searchTerm
@@ -41,6 +49,9 @@ export default {
                 //update data videos object
                 this.videos = res.data.items
             })
+        },
+        onVideoSelectInApp(video) {
+            this.selectedVideo = video;
         }
     } 
 }
