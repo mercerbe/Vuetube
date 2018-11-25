@@ -1,6 +1,9 @@
 <template>
     <div v-if="video">
-        {{ video.snippet.title }}
+        <div class="details">
+            <h4>{{ video.snippet.title }}</h4>
+            <p>{{ video.snippet.description }}</p>
+        </div>
     </div>
 </template>
 
