@@ -1,15 +1,16 @@
 <template>
-    <div>
+    <div class="container">
         <SearchBar @termChange="onTermChange"/>
-        <VideoList/>
-        {{videos.length}}
+        <!-- bind to send :videos to as prop to videolist from videos in parent -->
+        <VideoList :videos="videos"> </VideoList>
     </div>
 </template>
 
 <script>
 //dependencies
+import dotenv from 'dotenv';
+dotenv.config()
 import axios from 'axios';
-
 // components 
 import SearchBar from "./components/SearchBar";
 import VideoList from "./components/VideoList";
@@ -30,7 +31,7 @@ export default {
             axios
                 .get("https://www.googleapis.com/youtube/v3/search", {
                     params: {
-                        key: API_KEY,
+                        key: process.env.VUE_APP_API_KEY,
                         type: "video",
                         part: "snippet",
                         q: searchTerm
