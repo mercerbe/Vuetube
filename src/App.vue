@@ -1,9 +1,11 @@
 <template>
     <div class="container">
         <SearchBar @termChange="onTermChange"/>
-        <VideoDetail :video="selectedVideo"></VideoDetail>
-        <!-- bind to send :videos to as prop to videolist from videos in parent -->
-        <VideoList @videoSelect="onVideoSelectInApp" :videos="videos"> </VideoList>
+        <div class="row">
+            <VideoDetail :video="selectedVideo"></VideoDetail>
+            <!-- bind to send :videos to as prop to videolist from videos in parent -->
+            <VideoList @videoSelect="onVideoSelectInApp" :videos="videos"> </VideoList>
+        </div>
     </div>
 </template>
 

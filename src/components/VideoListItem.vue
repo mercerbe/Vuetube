@@ -1,6 +1,6 @@
 <template>
     <li class="media">
-        <img class="mr3" :src="thumbnailUrl" alt="" @click="onVideoSelect"/>
+        <img class="mr-3" :src="thumbnailUrl" alt="" @click="onVideoSelect"/>
         <div class="media-body">
             {{ video.snippet.title }}
         </div>
