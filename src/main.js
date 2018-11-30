@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App';
+import "vue-material/dist/vue-material.min.css";
 
 new Vue({
   render: h => h(App),
